@@ -1,0 +1,9 @@
+Go to file which need to be run —> click left click —> go to change configuration —> a dialog box opens .. on the top right click on more option .. in that select the VM named thing and after adding it .. —> in this box type —> 
+
+-ea:com.semanticsquare.exceptions.assertions.A     // we are enabling this only for A
+
+-ea:com.semanticsquare.exceptions.assertions...     // we are enabling it for all , the current package and its subpackages also.
+
+-ea:com.semanticsquare.exceptions.assertions... -da:com.semanticsquare.exceptions.assertions.D   //we are disabling only for D
+
+-ea -da:com.semanticsquare.exceptions.assertions.D   // we are disabling only for D --> any objects created by A are enabled .

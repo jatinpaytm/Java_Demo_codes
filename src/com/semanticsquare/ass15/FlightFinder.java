@@ -43,17 +43,24 @@ public class FlightFinder {
         // Step 2: Find departing flights at departureCity
         List<Flight> allDepartingFlights = allFlights.get(departureCity);
 
+
+
         NavigableSet<Flight> departingflights = new TreeSet<>();
 
         // Your code
         // Tip: Methods like isAfter can be used to find flights in the specified user time interval
+
+        // System.out.println("departingflights\n");
+        //for(Flight x:allDepartingFlights){System.out.println(x);}
         for(Flight x:allDepartingFlights)
         {
-            System.out.println(x.getDepartureTime());
-            System.out.println(DepartureEndTime);
-            if((x.getDepartureTime().toLocalTime()).isAfter(DepartureStartTime) && (x.getDepartureTime().toLocalTime()).isBefore(DepartureEndTime))
+            //System.out.println(x.getDepartureTime());
+            //System.out.println(DepartureEndTime);
+            if((x.getDepartureTime().toLocalTime()).isAfter(DepartureStartTime) && (x.getDepartureTime().toLocalTime()).isBefore(DepartureEndTime)  && (x.getArrivalCity()).equals(arrivalCity))
             {
-                allDepartingFlights.add(x);
+                //allDepartingFlights.add(x);
+                //System.out.println(x);
+                departingflights.add(x);
             }
         }
 
@@ -64,28 +71,33 @@ public class FlightFinder {
 
         List<Flight> allConnectingFlights = allFlights.get(arrivalCity);
 
+
         NavigableSet<Flight> connectingflights = new TreeSet<>();
 
         // Your code
-
-        for(Flight x:allDepartingFlights)
+        // System.out.println("connectingflights\n");
+        //for(Flight x:allConnectingFlights){System.out.println(x);}
+        if(departingflights.size()!=0 && allConnectingFlights.size()!=0)
         {
-            if(allDepartingFlights.size()==0)
-                break;
-            if(allConnectingFlights.size()==0)
-                break;
-            LocalTime ConnectingStartTime = LocalTime.of(x.getDepartureTime().getHour()+2, 00, 00);
-            System.out.println(ConnectingStartTime);
-            for(Flight y:allConnectingFlights)
+            for(Flight y:allConnectingFlights )
             {
-                if((y.getDepartureTime().toLocalTime()).isAfter(ConnectingStartTime))
-                {
-                    connectingflights.add(x);
-                }
-            }
 
+                for(Flight x:departingflights)
+                {
+                    LocalTime ConnectingStartTime = LocalTime.of(x.getDepartureTime().getHour()+2, 00, 00);
+                    if((y.getDepartureTime().toLocalTime()).isAfter(ConnectingStartTime) && (y.getArrivalCity()).equals(finalArrivalCity))
+                    {
+                        //System.out.println(y);
+                        connectingflights.add(y);
+                        break; // please break here else they will repeat
+                    }
+                }
+
+            }
         }
 
+        //System.out.println("no of departingflights : " + departingflights.size());
+        //System.out.println("no of connectingflights : " + connectingflights.size());
         result.add(departingflights);
         result.add(connectingflights);
 

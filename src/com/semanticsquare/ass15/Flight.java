@@ -68,6 +68,19 @@ public class Flight implements Comparable<Flight> {
     }
 
     @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", flightNumber='" + flightNumber + '\'' +
+                ", airline='" + airline + '\'' +
+                ", departureCity='" + departureCity + '\'' +
+                ", arrivalCity='" + arrivalCity + '\'' +
+                ", departureTime=" + departureTime +
+                ", arrivalTime=" + arrivalTime +
+                '}';
+    }
+
+    @Override
     public int compareTo(Flight flight) {
         if(this.arrivalTime.isBefore(flight.arrivalTime))
         {
@@ -76,7 +89,6 @@ public class Flight implements Comparable<Flight> {
         else {
             return 1;
         }
-
     }
 
 }
